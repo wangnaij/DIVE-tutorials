@@ -493,39 +493,11 @@ The retained counts remain raw and unnormalized.</p>
 <p>Run DIVE with regular execution. By default, DIVE automatically
 chooses the number of genes processed in each batch based on the number
 of spatial locations.</p>
-<pre class="r"><code>fit_dlpfc &lt;- dive(counts = counts_dlpfc, coords = coords_dlpfc)</code></pre>
-<pre><code>## DIVE: validating raw counts and coordinate identifiers</code></pre>
-<pre><code>## Mode: regular; 4321 genes x 3673 locations; up to 500 genes/batch</code></pre>
-<pre><code>## Validating full count content for reproducible checkpoints</code></pre>
-<pre><code>## Calibrating spatial distances.</code></pre>
-<pre><code>## Building local neighbors and sampled multiscale edges.</code></pre>
-<pre><code>## Constructed 192,599 undirected edges; selecting bandwidths.</code></pre>
-<pre><code>## Loading graph kernels for regular execution.</code></pre>
-<pre><code>## Cross-fit fold 1/2: training panel selection</code></pre>
-<pre><code>##   500/2160 genes complete</code></pre>
-<pre><code>##   1000/2160 genes complete</code></pre>
-<pre><code>##   1500/2160 genes complete</code></pre>
-<pre><code>##   2000/2160 genes complete</code></pre>
-<pre><code>##   2160/2160 genes complete</code></pre>
-<pre><code>## Cross-fit fold 1/2: held-out gene testing</code></pre>
-<pre><code>##   500/2161 genes complete</code></pre>
-<pre><code>##   1000/2161 genes complete</code></pre>
-<pre><code>##   1500/2161 genes complete</code></pre>
-<pre><code>##   2000/2161 genes complete</code></pre>
-<pre><code>##   2161/2161 genes complete</code></pre>
-<pre><code>## Cross-fit fold 2/2: training panel selection</code></pre>
-<pre><code>##   500/2161 genes complete</code></pre>
-<pre><code>##   1000/2161 genes complete</code></pre>
-<pre><code>##   1500/2161 genes complete</code></pre>
-<pre><code>##   2000/2161 genes complete</code></pre>
-<pre><code>##   2161/2161 genes complete</code></pre>
-<pre><code>## Cross-fit fold 2/2: held-out gene testing</code></pre>
-<pre><code>##   500/2160 genes complete</code></pre>
-<pre><code>##   1000/2160 genes complete</code></pre>
-<pre><code>##   1500/2160 genes complete</code></pre>
-<pre><code>##   2000/2160 genes complete</code></pre>
-<pre><code>##   2160/2160 genes complete</code></pre>
-<pre><code>## DIVE finished: 1979 SVGs at BY-adjusted p &lt; 0.05; 0 untestable genes.</code></pre>
+<pre class="r"><code>fit_dlpfc &lt;- dive(
+  counts = counts_dlpfc,
+  coords = coords_dlpfc,
+  verbose = FALSE
+)</code></pre>
 <p>Alternatively, use <code>control</code> to specify a maximum batch
 size. The following call limits each batch to at most 100 genes. Use
 this call instead of the preceding call if you prefer to set this
@@ -533,7 +505,8 @@ limit.</p>
 <pre class="r"><code>fit_dlpfc &lt;- dive(
   counts = counts_dlpfc,
   coords = coords_dlpfc,
-  control = dive_control(max_chunk_genes = 100)
+  control = dive_control(max_chunk_genes = 100),
+  verbose = FALSE
 )</code></pre>
 <p>Regular execution supports both small and large datasets when
 sufficient RAM is available. <code>max_chunk_genes</code> specifies an
